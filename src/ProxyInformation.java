@@ -37,8 +37,10 @@ public class ProxyInformation implements InformationManage{
         System.out.println("正在检查信息合法性……");
 
         for(int i = 0; i < information.length; i++) {
-            if(information[i] == null || information[i].replace(" ","").equals("")) {
+            if(information[i] == null || information[i].equals("")) {
                 information[i] = informationOld[i];
+            }else if (information[i].replace(" ","").equals("")) {
+                checkLegal = true;
             }
             if(!information[i].equals(informationOld[i])) {
                 changeNum += 1;
