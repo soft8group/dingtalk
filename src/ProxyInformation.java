@@ -50,10 +50,12 @@ public class ProxyInformation implements InformationManage{
 
         if (checkLegal) {
             System.out.println("变更中存在非法信息，检查不通过！");
-        } else {
+        } else if (changeNum > 0) {
             realUser.setInformation(information);
             realUser.submitEdit();
             System.out.println("信息更改成功！");
+        } else {
+            System.out.println("未查询到信息变更");
         }
     }
 }
@@ -126,7 +128,6 @@ class User implements InformationManage{
         System.out.printf("地址：%s%n", this.address);
 
         System.out.println(" ");
-        System.out.println(" ");
         System.out.println("您的组织信息：");
         System.out.println("**************************");
         for(int i=0; i<group.size(); i++) {
@@ -136,6 +137,8 @@ class User implements InformationManage{
             System.out.printf("部门：%s%n", this.group.get(i).department);
             System.out.printf("工号： %s%n", this.group.get(i).workNumber);
         }
+        System.out.println(" ");
+        System.out.println(" ");
     }
 
     //个人信息返回函数
