@@ -1,11 +1,11 @@
-/*
+package com.dingtalk.user.manage;/*
  * 用户信息管理模块，包括用户查看信息、修改信息等功能
  * 使用代理设计模式，ProxyInformation为代理类
  */
 
 import java.util.ArrayList;
 
-public class ProxyInformation implements InformationManage{
+public class ProxyInformation implements InformationManage {
     private User realUser;
     private String userId;
 
