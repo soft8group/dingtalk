@@ -1,7 +1,7 @@
 package worktodo;
 import java.util.Scanner;
 public class WorkListBuild {
-    public static void main(String[] args) {
+    public static void main(String[] args)  {
         WorkList workList = new WorkList();
         Scanner input = new Scanner(System.in);
         loop:while( true ) {

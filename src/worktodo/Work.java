@@ -15,7 +15,7 @@ public class Work{
         return name;
     }
 
-    public String getContent() {
+    public String getContent(){
         return content;
     }
 }

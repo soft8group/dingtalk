@@ -30,7 +30,7 @@ public class WorkList {
         }
     }
 
-    public void deleteWorks() {
+    public void deleteWorks()  {
         System.out.println("请输入要删除的工作：");
         Scanner input = new Scanner(System.in);
         if (input.hasNextLine()) {
