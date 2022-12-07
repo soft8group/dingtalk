@@ -4,8 +4,17 @@ import java.util.List;
 import java.util.Scanner;
 
 public class WorkList {
-    private List<Work> works = new ArrayList<Work>();
-
+    private static List<Work> works = new ArrayList<Work>();
+    public void initwork(){
+        Work work1 = new Work();
+        work1.setName("250");
+        work1.setContent("pigpigpigpig");
+        Work work2 = new Work();
+        work2.setName("052");
+        work2.setContent("gipgipgipgip");
+        works.add(work1);
+        works.add(work2);
+    }
     public void addWork() {
         Work work = new Work();
         System.out.println("请输入工作名字：");
