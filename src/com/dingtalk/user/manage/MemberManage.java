@@ -1,7 +1,7 @@
 package com.dingtalk.user.manage;
 
 public interface MemberManage {
-    void addMember();
-    void removeMember();
+    void addMember(String userId);
+    void removeMember(String userId);
 
 }
