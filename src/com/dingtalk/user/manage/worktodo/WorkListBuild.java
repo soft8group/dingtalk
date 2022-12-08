@@ -4,7 +4,7 @@ import java.util.Scanner;
 public class WorkListBuild {
     public static void main(String[] args)  {
         WorkList workList = new WorkList();
-        workList.initwork();
+        workList.initWork();
         Scanner input = new Scanner(System.in);
         loop:while( true ) {
             System.out.println("------待办工作界面------");
