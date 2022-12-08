@@ -1,5 +1,8 @@
 package com.dingtalk.user.manage;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class ProxyMember implements MemberManage {
     private Administrator realAdministrator;
     private static String administratorId;
@@ -34,31 +37,56 @@ public class ProxyMember implements MemberManage {
 
     /**
      * 模拟代理类添加用户进组织
-     * @param useId 用于接收需要添加进组织用户的编号
+     * @param userId 用于接收需要添加进组织用户的编号
      */
     @Override
-    public void addMember(String useId) {}
+    public void addMember(String userId) {
+        if (realAdministrator == null) {
+            realAdministrator = new Administrator(administratorId);
+        }
+        if (controllingCorporation == null) {
+            controllingCorporation = new Corporation(corporationId);
+        }
+        realAdministrator.addMember(userId);
+        controllingCorporation.addMember(userId);
+        realAdministrator.submitEdit();
+
+    }
 
     /**
      * 模拟代理类将用户移除出组织
      * @param userId 用于接收需要移除出组织用户的编号
      */
     @Override
-    public void removeMember(String userId) {}
+    public void removeMember(String userId) {
+        if (realAdministrator == null) {
+            realAdministrator = new Administrator(administratorId);
+        }
+        if (controllingCorporation == null) {
+            controllingCorporation = new Corporation(corporationId);
+        }
+        realAdministrator.removeMember(userId);
+        controllingCorporation.removeMember(userId);
+        realAdministrator.submitEdit();
+    }
 
 
 }
 
 class Administrator extends User implements MemberManage {
-    private Administrator(String adminId) {
+    public Administrator(String adminId) {
         super(adminId);
     }
 
     @Override
-    public void addMember(String userId) {}
+    public void addMember(String userId) {
+        System.out.printf("选择ID为：%s的用户……%n", userId);
+    }
 
     @Override
-    public void removeMember(String userId) {}
+    public void removeMember(String userId) {
+        System.out.printf("选择ID为：%s的用户……%n", userId);
+    }
 
     //模拟向服务器传输修改结果
     public void submitEdit() {
@@ -66,7 +94,7 @@ class Administrator extends User implements MemberManage {
     }
 }
 
-class  Corporation {
+class  Corporation implements MemberManage {
     private String corporationId;
     private String corporationName;
     private static String[] manager = {"adc1","abc2"};
@@ -81,14 +109,65 @@ class  Corporation {
         System.out.printf("正在从服务器获取ID为：%s的组织信息……%n", this.corporationId);
     }
 
-    //检查是否为某公司管理员
-    public static boolean isManager(String memberId) {
+    /**
+     * 检查是否为某组织的管理员
+     * @param userId 用于接收需要检查身份的用户编号
+     * @return 返回是否为该组织的管理员
+     */
+    public static boolean isManager(String userId) {
         for (String i : manager) {
-            if (i.equals(memberId)) {
+            if (i.equals(userId)) {
                 return true;
             }
         }
 
         return false;
+    }
+
+    /**
+     * 检查是否为某组织成员
+     * @param userId 用于接收需要检查身份的用户编号
+     * @return 返回是否为该组织的成员
+     */
+    public static boolean isMember(String userId) {
+        for (String i : member) {
+            if (i.equals(userId)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    @Override
+    public void addMember(String userId) {
+        int i;
+        if (!Corporation.isMember(userId)) {
+            for (i = 0; i < Corporation.member.length; i++) {
+                if (Corporation.member[i].equals("")) {
+                    Corporation.member[i] = userId;
+                    return;
+                }
+            }
+            String[] newMember = new String[Corporation.member.length + 1];
+            newMember = Arrays.copyOfRange(Corporation.member,0,Corporation.member.length);
+            newMember[newMember.length - 1] = "userId";
+        } else {
+            System.out.printf("用户%s已在组织中", userId);
+        }
+    }
+
+    @Override
+    public void removeMember(String userId) {
+        if (Corporation.isMember(userId)) {
+            for (int i = 0; i < Corporation.member.length; i++) {
+                if (Corporation.member[i].equals(userId)) {
+                    Corporation.member[i] = "";
+                    break;
+                }
+            }
+        } else {
+            System.out.printf("找不到用户%s", userId);
+        }
     }
 }
