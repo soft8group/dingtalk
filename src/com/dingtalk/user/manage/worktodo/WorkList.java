@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class WorkList {
-    private static List<Work> works = new ArrayList<Work>();
+    private static List<Work> works = new ArrayList<>();
     public void initWork(){
         Work work1 = new Work();
         work1.setName("250");
@@ -17,8 +17,7 @@ public class WorkList {
         works.add(work2);
     }
     public void addWork() {
-        Work work1 = new Work();
-        Work work = work1;
+        Work work = new Work();
         System.out.println("请输入工作名字：");
         Scanner input = new Scanner(System.in);
         if (input.hasNextLine()) {
@@ -47,8 +46,7 @@ public class WorkList {
         if (input.hasNextLine()) {
             String str1 = input.nextLine();
             for (Work work :works) {
-                String str2 = work.getName();
-                if (str1.equals(str2)) {
+                if (str1.equals(work.getName())) {
                     works.remove(work);
                 }
             }
