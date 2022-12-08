@@ -1,4 +1,5 @@
-package worktodo;
+package com.dingtalk.user.manage.worktodo;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -16,7 +17,8 @@ public class WorkList {
         works.add(work2);
     }
     public void addWork() {
-        Work work = new Work();
+        Work work1 = new Work();
+        Work work = work1;
         System.out.println("请输入工作名字：");
         Scanner input = new Scanner(System.in);
         if (input.hasNextLine()) {
@@ -44,10 +46,10 @@ public class WorkList {
         Scanner input = new Scanner(System.in);
         if (input.hasNextLine()) {
             String str1 = input.nextLine();
-            for (Work work : works) {
+            for (Work work :works) {
                 String str2 = work.getName();
                 if (str1.equals(str2)) {
-                    boolean site = works.remove(work);
+                    works.remove(work);
                 }
             }
         }

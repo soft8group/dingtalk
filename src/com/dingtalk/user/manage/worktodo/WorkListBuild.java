@@ -1,4 +1,5 @@
-package worktodo;
+package com.dingtalk.user.manage.worktodo;
+
 import java.util.Scanner;
 public class WorkListBuild {
     public static void main(String[] args)  {

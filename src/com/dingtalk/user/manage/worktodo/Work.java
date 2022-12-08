@@ -1,6 +1,7 @@
 
-package worktodo;
-public class Work{
+package com.dingtalk.user.manage.worktodo;
+
+public class Work extends SelfWork {
     String name;
     String content;
     public void setName(String name) {
