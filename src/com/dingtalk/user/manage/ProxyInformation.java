@@ -7,12 +7,22 @@ import java.util.ArrayList;
 
 public class ProxyInformation implements InformationManage {
     private User realUser;
-    private String userId;
+    private static String userId;
 
-
-    public ProxyInformation(String userId) {
-        this.userId = userId;
+    //ProxyInformation的静态内部类，用于实现ProxyInformation类的单例创建
+    private static class ProxyInformationHolder {
+        private static ProxyInformation instance = new ProxyInformation();
     }
+
+
+    private ProxyInformation() {}
+
+    //获取唯一可用的实例
+    public static ProxyInformation getInstance(String userId) {
+        ProxyInformation.userId = userId;
+        return ProxyInformationHolder.instance;
+    }
+
 
     //代理类查看用户信息
     @Override
