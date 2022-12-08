@@ -1,6 +1,6 @@
 
 package worktodo;
-public class Work{
+public class Work extends SelfWork{
     String name;
     String content;
     public void setName(String name) {
