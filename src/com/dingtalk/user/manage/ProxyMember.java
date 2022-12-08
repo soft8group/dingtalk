@@ -48,8 +48,8 @@ public class ProxyMember implements MemberManage {
             controllingCorporation = new Corporation(corporationId);
         }
         realAdministrator.addMember(userId);
-        controllingCorporation.addMember(userId);
         realAdministrator.submitEdit();
+        controllingCorporation.addMember(userId);
 
     }
 
@@ -66,10 +66,19 @@ public class ProxyMember implements MemberManage {
             controllingCorporation = new Corporation(corporationId);
         }
         realAdministrator.removeMember(userId);
-        controllingCorporation.removeMember(userId);
         realAdministrator.submitEdit();
+        controllingCorporation.removeMember(userId);
     }
 
+    public void showMember() {
+        if (realAdministrator == null) {
+            realAdministrator = new Administrator(administratorId);
+        }
+        if (controllingCorporation == null) {
+            controllingCorporation = new Corporation(corporationId);
+        }
+        controllingCorporation.showMember();
+    }
 
 }
 
@@ -146,14 +155,17 @@ class  Corporation implements MemberManage {
             for (i = 0; i < Corporation.member.length; i++) {
                 if (Corporation.member[i].equals("")) {
                     Corporation.member[i] = userId;
+                    System.out.printf("成功添加用户%s%n", userId);
                     return;
                 }
             }
             String[] newMember = new String[Corporation.member.length + 1];
-            newMember = Arrays.copyOfRange(Corporation.member,0,Corporation.member.length);
-            newMember[newMember.length - 1] = "userId";
+            newMember = Arrays.copyOfRange(Corporation.member,0, newMember.length);
+            newMember[newMember.length-1] = userId;
+            Corporation.member = newMember;
+            System.out.printf("成功添加用户%s%n", userId);
         } else {
-            System.out.printf("用户%s已在组织中", userId);
+            System.out.printf("用户%s已在组织中%n", userId);
         }
     }
 
@@ -163,11 +175,19 @@ class  Corporation implements MemberManage {
             for (int i = 0; i < Corporation.member.length; i++) {
                 if (Corporation.member[i].equals(userId)) {
                     Corporation.member[i] = "";
+                    System.out.printf("成功移除用户%s%n", userId);
                     break;
                 }
             }
         } else {
-            System.out.printf("找不到用户%s", userId);
+            System.out.printf("找不到用户%s%n", userId);
         }
+    }
+
+    public void showMember() {
+        for (String i : Corporation.member) {
+            System.out.printf("%s ",i);
+        }
+        System.out.println(" ");
     }
 }
