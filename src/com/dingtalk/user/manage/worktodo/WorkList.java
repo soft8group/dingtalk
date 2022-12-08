@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class WorkList {
     private static List<Work> works = new ArrayList<Work>();
-    public void initwork(){
+    public void initWork(){
         Work work1 = new Work();
         work1.setName("250");
         work1.setContent("pigpigpigpig");
